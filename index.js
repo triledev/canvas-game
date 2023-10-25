@@ -21,7 +21,9 @@ class Player {
     }
 }
 
-const player = new Player(100, 100, 30, 'blue')
+const x = canvas.width / 2
+const y = canvas.height / 2
+const player = new Player(x, y, 30, 'blue')
 player.draw()
 
 console.log(player)
