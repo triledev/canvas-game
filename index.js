@@ -141,7 +141,7 @@ function animate() {
             const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
             // when particle touches enemy
             if (dist - enemy.radius - projectile.radius < 0) {
-                if (enemy.radius-10 > 10) {
+                if (enemy.radius-10 > 5) {
                     gsap.to(enemy, {
                         radius: enemy.radius - 10
                     })
