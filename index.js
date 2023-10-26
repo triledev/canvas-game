@@ -71,7 +71,7 @@ class Enemy {
 
 const x = canvas.width / 2
 const y = canvas.height / 2
-const player = new Player(x, y, 30, 'blue')
+const player = new Player(x, y, 30, 'white')
 
 const projectile = new Projectile(
     canvas.width/2, 
@@ -96,11 +96,9 @@ function spawnEnemies() {
         if (Math.random() < 0.5) {
             x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius
             y = Math.random() * canvas.height
-            color = 'yellow'
         } else {
             x = Math.random() * canvas.width 
             y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
-            color = 'red'
         }
         
         // always subtract from your destination
@@ -109,6 +107,7 @@ function spawnEnemies() {
             x: Math.cos(angle),
             y: Math.sin(angle)
         }
+        color = `hsl(${Math.random() * 360}, 50%, 50%)`
         enemies.push(new Enemy(x, y, radius, color, velocity))
     }, 1000)
 }
@@ -153,11 +152,11 @@ console.log(player)
 addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height/2, event.clientX - canvas.width/2)
     const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
+        x: Math.cos(angle) * 6,
+        y: Math.sin(angle) * 6
     }
     projectiles.push(
-        new Projectile(canvas.width/2, canvas.height/2, 5, 'red', velocity)
+        new Projectile(canvas.width/2, canvas.height/2, 5, 'white', velocity)
     )
     console.log(event)
 
