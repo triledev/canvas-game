@@ -1,3 +1,4 @@
+console.log(gsap)
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -141,7 +142,9 @@ function animate() {
             // when particle touches enemy
             if (dist - enemy.radius - projectile.radius < 0) {
                 if (enemy.radius-10 > 10) {
-                    enemy.radius -= 10
+                    gsap.to(enemy, {
+                        radius: enemy.radius - 10
+                    })
                     setTimeout(() => {
                         projectiles.splice(projectileIndex, 1)
                     }, 0)
