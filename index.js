@@ -38,6 +38,7 @@ class Projectile {
     }
 
     update() {
+        this.draw()
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y 
 
@@ -54,12 +55,20 @@ const projectile = new Projectile(
     canvas.height/2, 5, 
     'red', 
     { x: 1, y: 1})
+const projectile2 = new Projectile(
+    canvas.width/2, 
+    canvas.height/2, 5, 
+    'green', 
+    { x: -1, y: -1})
+const projectiles = [projectile, projectile2]
+
+
 
 function animate() {
     requestAnimationFrame(animate)
-    projectile.draw()
-    projectile.update()
-    console.log('go')
+    projectiles.forEach((projectile) => {
+        projectile.update()
+    })
 }
 
 console.log(player)
