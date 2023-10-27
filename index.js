@@ -5,6 +5,7 @@ const c = canvas.getContext('2d')
 const scoreEl = document.querySelector('#scoreEl')
 const modalEl = document.querySelector('#modalEl')
 const modalScoreEl = document.querySelector('#modalScoreEl')
+const buttonEl = document.querySelector('#buttonEl')
 
 canvas.width = innerWidth
 canvas.height = innerHeight
@@ -74,7 +75,6 @@ class Enemy {
     }
 }
 
-const friction = 0.97
 class Particle {
     constructor(x, y, radius, color, velocity) {
         this.x = x
@@ -107,13 +107,27 @@ class Particle {
 
 const x = canvas.width / 2
 const y = canvas.height / 2
-const player = new Player(x, y, 30, 'white')
-const projectiles = []
-const enemies = []
-const particles = []
+const friction = 0.97
+
+let player = new Player(x, y, 10, 'white')
+let projectiles = []
+let enemies = []
+let particles = []
+let animationId
+let intevalId
+let score = 0
+
+function init() {
+    player = new Player(x, y, 10, 'white')
+    projectiles = []
+    enemies = []
+    particles = []
+    score = 0
+}
 
 function spawnEnemies() {
-    setInterval(() => {
+    intevalId = setInterval(() => {
+        console.log(intevalId)
         const radius = Math.random() * (30-4) + 4
         let x
         let y 
@@ -137,8 +151,6 @@ function spawnEnemies() {
     }, 1000)
 }
 
-let animationId
-let score = 0
 function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = 'rgba(0, 0, 0, 0.1)'
@@ -176,6 +188,7 @@ function animate() {
         // end game
         if (dist - enemy.radius - player.radius < 0) {
             cancelAnimationFrame(animationId)
+            clearInterval(intevalId)
             modalEl.style.display = 'block'
             modalScoreEl.innerHTML = score
         }
@@ -224,7 +237,8 @@ function animate() {
     }
 }
 
-addEventListener('click', (event) => {
+window.addEventListener('click', (event) => {
+    console.log(projectiles)
     const angle = Math.atan2(event.clientY - canvas.height/2, event.clientX - canvas.width/2)
     const velocity = {
         x: Math.cos(angle) * 6,
@@ -233,8 +247,13 @@ addEventListener('click', (event) => {
     projectiles.push(
         new Projectile(canvas.width/2, canvas.height/2, 5, 'white', velocity)
     )
-    console.log(event)
+})
 
+buttonEl.addEventListener('click', (event) => {
+    init()
+    animate()
+    spawnEnemies()
+    modalEl.style.display = 'none'
 })
 
 animate()
