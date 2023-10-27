@@ -192,6 +192,7 @@ function animate() {
             cancelAnimationFrame(animationId)
             clearInterval(intevalId)
             modalEl.style.display = 'block'
+            gsap.fromTo('#modalEl', {scale: 0.8, opacity: 0}, {scale: 1, opacity: 1, ease: 'expo'})
             modalScoreEl.innerHTML = score
         }
 
