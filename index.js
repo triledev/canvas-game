@@ -256,7 +256,16 @@ buttonEl.addEventListener('click', (event) => {
     init()
     animate()
     spawnEnemies()
-    modalEl.style.display = 'none'
+    // modalEl.style.display = 'none'
+    gsap.to('#modalEl', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.2,
+        ease: 'expo.in', 
+        onComplete: () => {
+            modalEl.style.display = 'none'
+        }
+    })
 })
 
 startButtonEl.addEventListener('click', () => {
