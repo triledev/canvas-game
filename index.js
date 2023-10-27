@@ -39,8 +39,18 @@ class Player {
         this.velocity.x *= friction
         this.velocity.y *= friction
 
-        this.x += this.velocity.x 
-        this.y += this.velocity.y
+        if (this.x + this.radius + this.velocity.x <= canvas.width &&
+            this.x - this.radius + this.velocity.x >= 0) {
+            this.x += this.velocity.x 
+        } else {
+            this.velocity.x = 0
+        }
+        if (this.y + this.radius + this.velocity.y <= canvas.height &&
+            this.y - this.radius + this.velocity.y >= 0) {
+            this.y += this.velocity.y
+        } else {
+            this.velocity.y = 0
+        }
     }
 }
 
