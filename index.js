@@ -268,7 +268,9 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => {
-    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
+    const angle = Math.atan2(
+        event.clientY - player.y, 
+        event.clientX - player.x)
     const velocity = {
         x: Math.cos(angle) * 6,
         y: Math.sin(angle) * 6
@@ -312,16 +314,16 @@ startButtonEl.addEventListener('click', () => {
 window.addEventListener('keydown', (event) => {
     console.log(event)
     switch (event.key) {
-        case 'ArrowRight':
+        case 'f':
             player.velocity.x += 1    
             break
-        case 'ArrowUp':
+        case 'd':
             player.velocity.y -= 1
             break
-        case 'ArrowLeft':
+        case 'a':
             player.velocity.x -= 1
             break
-        case 'ArrowDown':
+        case 's':
             player.velocity.y += 1
             break
         default:
