@@ -262,5 +262,14 @@ startButtonEl.addEventListener('click', () => {
     init()
     animate()
     spawnEnemies()
-    startModalEl.style.display = 'none'
+    // startModalEl.style.display = 'none'
+    gsap.to('#startModalEl', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.2,
+        ease: 'expo.in', 
+        onComplete: () => {
+            startModalEl.style.display = 'none'
+        }
+    })
 })
