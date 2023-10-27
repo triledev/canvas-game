@@ -1,9 +1,10 @@
-console.log(gsap)
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 const scoreEl = document.querySelector('#scoreEl')
-console.log(scoreEl)
+const modalEl = document.querySelector('#modalEl')
+const modalScoreEl = document.querySelector('#modalScoreEl')
 
 canvas.width = innerWidth
 canvas.height = innerHeight
@@ -169,9 +170,14 @@ function animate() {
         const enemy = enemies[index]
 
         enemy.update()
+        
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
+
+        // end game
         if (dist - enemy.radius - player.radius < 0) {
             cancelAnimationFrame(animationId)
+            modalEl.style.display = 'block'
+            modalScoreEl.innerHTML = score
         }
 
         for (let projectileIndex = projectiles.length-1; projectileIndex >= 0; projectileIndex--) {
@@ -218,7 +224,6 @@ function animate() {
     }
 }
 
-console.log(player)
 addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height/2, event.clientX - canvas.width/2)
     const velocity = {
