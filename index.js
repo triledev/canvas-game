@@ -125,6 +125,7 @@ function init() {
     enemies = []
     particles = []
     score = 0
+    scoreEl.innerHTML = 0
 }
 
 function spawnEnemies() {
