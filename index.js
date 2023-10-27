@@ -19,6 +19,11 @@ class Player {
 
         this.radius = radius
         this.color = color
+    
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
     }
 
     draw() {
@@ -26,6 +31,12 @@ class Player {
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
         c.fillStyle = this.color
         c.fill()
+    }
+
+    update() {
+        this.draw()
+        this.x += this.velocity.x 
+        this.y += this.velocity.y
     }
 }
 
@@ -158,7 +169,8 @@ function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = 'rgba(0, 0, 0, 0.1)'
     c.fillRect(0, 0, canvas.width, canvas.height)
-    player.draw()
+
+    player.update()
     
     for (let index = particles.length-1; index >= 0; index--) {
         const particle = particles[index]
@@ -282,4 +294,24 @@ startButtonEl.addEventListener('click', () => {
             startModalEl.style.display = 'none'
         }
     })
+})
+
+window.addEventListener('keydown', (event) => {
+    console.log(event)
+    switch (event.key) {
+        case 'ArrowRight':
+            player.velocity.x += 1    
+            break
+        case 'ArrowUp':
+            player.velocity.y -= 1
+            break
+        case 'ArrowLeft':
+            player.velocity.x -= 1
+            break
+        case 'ArrowDown':
+            player.velocity.y += 1
+            break
+        default:
+            break
+    }
 })
