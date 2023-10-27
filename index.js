@@ -252,11 +252,11 @@ window.addEventListener('click', (event) => {
     )
 })
 
+// restart game
 buttonEl.addEventListener('click', (event) => {
     init()
     animate()
     spawnEnemies()
-    // modalEl.style.display = 'none'
     gsap.to('#modalEl', {
         opacity: 0,
         scale: 0.8,
@@ -272,7 +272,6 @@ startButtonEl.addEventListener('click', () => {
     init()
     animate()
     spawnEnemies()
-    // startModalEl.style.display = 'none'
     gsap.to('#startModalEl', {
         opacity: 0,
         scale: 0.8,
