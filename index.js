@@ -12,11 +12,8 @@ const startModalEl = document.querySelector('#startModalEl')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-
-
 const x = canvas.width / 2
 const y = canvas.height / 2
-
 
 let player = new Player(x, y, 10, 'white')
 let projectiles = []
@@ -25,6 +22,12 @@ let particles = []
 let animationId
 let intevalId
 let score = 0
+let powerUp = new PowerUp({
+    position: {
+        x: 100,
+        y: 100
+    }
+})
 
 function init() {
     player = new Player(x, y, 10, 'white')
@@ -67,6 +70,7 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     player.update()
+    powerUp.draw()  
     
     for (let index = particles.length-1; index >= 0; index--) {
         const particle = particles[index]

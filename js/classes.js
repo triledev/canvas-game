@@ -167,11 +167,16 @@ class Particle {
     }
 }
 
-const powerUp = new PowerUp({x:100, y:100, velocity:{x:0, y:0}}) 
 class PowerUp {
-    constructor(x, y, velocity) {
-        this.x = x
-        this.y = y 
+    constructor({ position = {x: 0, y: 0} , velocity }) {
+        this.position = position
         this.velocity = velocity 
+
+        this.image = new Image()
+        this.image.src = './img/lightningBolt.png'
+    }
+
+    draw() {
+        c.drawImage(this.image, 100, 100)
     }
 }
