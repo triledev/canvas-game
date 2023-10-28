@@ -85,20 +85,22 @@ class Enemy {
         this.radius = radius 
         this.color = color
         this.velocity = velocity
-        this.type = 'Homing Spinning'
-        // this.type = 'Linear'
+        this.type = 'Linear'
         this.radians = 0
         this.center = {
             x,
             y
         }
 
-        // if (Math.random() < 0.5) {
-        //     this.type = 'Homing'
-        //     if (Math.random() < 0.5) {
-        //         this.type = 'Spinning'
-        //     }
-        // }
+        if (Math.random() < 0.5) {
+            this.type = 'Homing'
+            if (Math.random() < 0.5) {
+                this.type = 'Spinning'
+                if (Math.random() < 0.5) {
+                    this.type = 'Homing Spinning'
+                }
+            }
+        }
     }
 
     draw() {
