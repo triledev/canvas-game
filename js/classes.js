@@ -136,6 +136,7 @@ class Enemy {
     }
 }
 
+const friction = 0.97
 class Particle {
     constructor(x, y, radius, color, velocity) {
         this.x = x
@@ -163,5 +164,14 @@ class Particle {
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y 
         this.alpha -= 0.01
+    }
+}
+
+const powerUp = new PowerUp({x:100, y:100, velocity:{x:0, y:0}}) 
+class PowerUp {
+    constructor(x, y, velocity) {
+        this.x = x
+        this.y = y 
+        this.velocity = velocity 
     }
 }
