@@ -94,6 +94,9 @@ class Enemy {
 
         if (Math.random() < 0.5) {
             this.type = 'Homing'
+            if (Math.random() < 0.5) {
+                this.type = 'Spinning'
+            }
         }
     }
 
@@ -106,25 +109,28 @@ class Enemy {
 
     update() {
         this.draw()
-        this.radians += 0.1
 
-        // the center targeting player
-        this.center.x += this.velocity.x
-        this.center.y += this.velocity.y 
-        
-        // actual reanderd position
-        this.x = this.center.x + Math.cos(this.radians) * 30
-        this.y = this.center.y + Math.sin(this.radians) * 30
+        if (this.type == 'Spinning') {
+            this.radians += 0.1
+            // the center targeting player
+            this.center.x += this.velocity.x
+            this.center.y += this.velocity.y 
+            
+            // actual reanderd position
+            this.x = this.center.x + Math.cos(this.radians) * 30
+            this.y = this.center.y + Math.sin(this.radians) * 30
+        } else if (this.type == 'Homing') {
+            // calculate the angle to target the player
+            const angle = Math.atan2(player.y - this.y, player.x - this.x)
+            this.velocity.x = Math.cos(angle)
+            this.velocity.y = Math.sin(angle)
 
-        // if (this.type == 'Homing') {
-        //     // calculate the angle to target the player
-        //     const angle = Math.atan2(player.y - this.y, player.x - this.x)
-        //     this.velocity.x = Math.cos(angle)
-        //     this.velocity.y = Math.sin(angle)
-        // }
-
-        // this.x = this.x + this.velocity.x
-        // this.y = this.y + this.velocity.y 
+            this.x = this.x + this.velocity.x
+            this.y = this.y + this.velocity.y 
+        } else {
+            this.x = this.x + this.velocity.x
+            this.y = this.y + this.velocity.y 
+        }
     }
 }
 
