@@ -261,7 +261,15 @@ function animate() {
                     setTimeout(() => {
                         // change background particles color
                         backgroundParticles.forEach(backgroundParticle => {
-                            backgroundParticle.color = enemy.color
+                            gsap.set(backgroundParticle, {
+                                color: 'white',
+                                alpha: 1
+                            })
+                            gsap.to(backgroundParticle, {
+                                color: enemy.color,
+                                alpha: 0.1
+                            })
+                            // backgroundParticle.color = enemy.color
                         })
                         enemies.splice(index, 1)
                         projectiles.splice(projectileIndex, 1)
