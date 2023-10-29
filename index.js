@@ -48,11 +48,8 @@ function init() {
         for (let y = 0; y < canvas.height + spacing; y+=spacing) {
             backgroundParticles.push(
                 new BackgroundParicle({
-                    position: {
-                        x: x,
-                        y: y
-                    },
-                    radius: 5
+                    position: {x, y},
+                    radius: 3
                 })
             ) // end row
         }
@@ -127,6 +124,14 @@ function animate() {
 
     backgroundParticles.forEach(backgroundParticle => {
         backgroundParticle.draw()
+
+        const dist = Math.hypot(player.x - backgroundParticle.position.x, player.y - backgroundParticle.position.y)
+        if (dist < 100) {
+            backgroundParticle.alpha = 0
+        } else if (dist > 100) {
+            backgroundParticle.alpha = 1
+        }
+
     })
     player.update()
     for (let i = powerUps.length-1; i >= 0; i--) {
