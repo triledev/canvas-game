@@ -128,6 +128,9 @@ function animate() {
         const dist = Math.hypot(player.x - backgroundParticle.position.x, player.y - backgroundParticle.position.y)
         if (dist < 100) {
             backgroundParticle.alpha = 0
+            if (dist > 70) {
+                backgroundParticle.alpha = 0.5
+            }
         } else if (dist > 100) {
             backgroundParticle.alpha = 0.1
         }
