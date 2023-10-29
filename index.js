@@ -23,6 +23,7 @@ let animationId
 let intevalId
 let score = 0
 let powerUps = []
+let frames = 0
 
 function init() {
     player = new Player(x, y, 10, 'white')
@@ -39,6 +40,7 @@ function init() {
     ]
     score = 0
     scoreEl.innerHTML = 0
+    frames = 0
 }
 
 function spawnEnemies() {
@@ -71,6 +73,7 @@ function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = 'rgba(0, 0, 0, 0.1)'
     c.fillRect(0, 0, canvas.width, canvas.height)
+    frames++
 
     player.update()
     for (let i = powerUps.length-1; i >= 0; i--) {
@@ -95,7 +98,9 @@ function animate() {
             x: Math.cos(angle) * 6,
             y: Math.sin(angle) * 6
         }
-        projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity))
+        if (frames % 2 === 0) {
+            projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity))
+        }
     }
     
     for (let index = particles.length-1; index >= 0; index--) {
