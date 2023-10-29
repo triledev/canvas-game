@@ -43,8 +43,9 @@ function init() {
         radius: 5
     })]
 
-    for (let x = 0; x < canvas.width; x+=20) {
-        for (let y = 0; y < canvas.height; y+=20) {
+    const spacing = 30
+    for (let x = 0; x < canvas.width + spacing; x+=spacing) {
+        for (let y = 0; y < canvas.height + spacing; y+=spacing) {
             backgroundParticles.push(
                 new BackgroundParicle({
                     position: {
