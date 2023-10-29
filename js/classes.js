@@ -174,9 +174,30 @@ class PowerUp {
 
         this.image = new Image()
         this.image.src = './img/lightningBolt.png'
+
+        this.alpha = 1
+        gsap.to(this, {
+            alpha: 0,
+            duration: 0.3,
+            repeat: -1,
+            yoyo: true
+        })
+
+        this.radians = 0
     }
 
     draw() {
+        c.save()
+        c.globalAlpha = this.alpha
+        c.translate(this.position.x + this.image.width/2, this.position.y + this.image.height/2)
+        c.rotate(this.radians)
+        c.translate(-this.position.x - this.image.width/2, -this.position.y - this.image.height/2)
         c.drawImage(this.image, 100, 100)
+        c.restore()
+    }
+
+    update() {
+        this.draw()
+        this.radians += 0.01
     }
 }

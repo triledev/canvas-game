@@ -22,18 +22,21 @@ let particles = []
 let animationId
 let intevalId
 let score = 0
-let powerUp = new PowerUp({
-    position: {
-        x: 100,
-        y: 100
-    }
-})
+let powerUps = []
 
 function init() {
     player = new Player(x, y, 10, 'white')
     projectiles = []
     enemies = []
     particles = []
+    powerUps = [
+        new PowerUp({
+            position: {
+                x: 100,
+                y: 100
+            }
+        })
+    ]
     score = 0
     scoreEl.innerHTML = 0
 }
@@ -70,7 +73,10 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     player.update()
-    powerUp.draw()  
+    for (let i = powerUps.length-1; i >= 0; i--) {
+        const powerUp = powerUps[i]
+        powerUp.update()
+    }
     
     for (let index = particles.length-1; index >= 0; index--) {
         const particle = particles[index]
