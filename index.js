@@ -160,7 +160,6 @@ function animate() {
             }, 5000);
         }
     }
-    console.log(powerUps)
 
     // machine gun animation / implementation
     if (player.powerUp === 'MachineGun') {
@@ -260,6 +259,10 @@ function animate() {
                         score: 150
                     })
                     setTimeout(() => {
+                        // change background particles color
+                        backgroundParticles.forEach(backgroundParticle => {
+                            backgroundParticle.color = enemy.color
+                        })
                         enemies.splice(index, 1)
                         projectiles.splice(projectileIndex, 1)
                     }, 0)
