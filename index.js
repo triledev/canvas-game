@@ -85,6 +85,11 @@ function createScoreLabel({ position }) {
     scoreLabel.style.left = position.x + 'px'
     scoreLabel.style.top = position.y + 'px'
     document.body.appendChild(scoreLabel)
+    gsap.to(scoreLabel, {
+        opacity: 0,
+        y: -30,
+        duration: 0.75
+    })
 }
 
 function animate() {
