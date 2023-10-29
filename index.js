@@ -84,6 +84,7 @@ function createScoreLabel({ position }) {
     scoreLabel.style.position = 'absolute'
     scoreLabel.style.left = position.x + 'px'
     scoreLabel.style.top = position.y + 'px'
+    scoreLabel.style.userSelect = 'none'
     document.body.appendChild(scoreLabel)
     gsap.to(scoreLabel, {
         opacity: 0,
