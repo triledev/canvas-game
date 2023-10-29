@@ -84,6 +84,16 @@ function animate() {
             player.powerUp = 'MachineGun'
         }
     }
+
+    // machine gun animation / implementation
+    if (player.powerUp === 'MachineGun') {
+        const angle = Math.atan2(mouse.position.y - player.y, mouse.position.x - player.x)
+        const velocity = {
+            x: Math.cos(angle) * 6,
+            y: Math.sin(angle) * 6
+        }
+        projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity))
+    }
     
     for (let index = particles.length-1; index >= 0; index--) {
         const particle = particles[index]
@@ -179,6 +189,17 @@ window.addEventListener('click', (event) => {
     )
 })
 
+const mouse = {
+    position: {
+        x: 0,
+        y: 0
+    }
+}
+window.addEventListener('mousemove', (event) => {
+    mouse.position.x = event.clientX
+    mouse.position.y = event.clientY
+    console.log(mouse.position)
+})
 // restart game
 buttonEl.addEventListener('click', (event) => {
     init()
