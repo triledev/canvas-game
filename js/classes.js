@@ -11,7 +11,7 @@ class Player {
             y: 0
         }
 
-        this.powerUp = 'None'
+        this.powerUp = null
     }
 
     draw() {
@@ -180,9 +180,10 @@ class PowerUp {
         this.alpha = 1
         gsap.to(this, {
             alpha: 0,
-            duration: 0.3,
+            duration: 0.2,
             repeat: -1,
-            yoyo: true
+            yoyo: true,
+            ease: 'linear'
         })
 
         this.radians = 0

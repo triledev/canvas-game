@@ -38,7 +38,6 @@ function init() {
 
 function spawnEnemies() {
     intevalId = setInterval(() => {
-        console.log(intevalId)
         const radius = Math.random() * (30-4) + 4
         let x
         let y 
@@ -71,11 +70,11 @@ function spawnPowerUps() {
                 y: Math.random() * canvas.height
             },
             velocity: {
-                x: Math.random() + 1,
+                x: Math.random() + 2,
                 y: 0
             }
         }))
-    }, 1000)
+    }, 10000)
 }
 function animate() {
     animationId = requestAnimationFrame(animate)
@@ -86,18 +85,26 @@ function animate() {
     player.update()
     for (let i = powerUps.length-1; i >= 0; i--) {
         const powerUp = powerUps[i]
-        powerUp.update()
+
+        if (powerUp.position.x > canvas.width) {
+            powerUps.splice(i, 1)
+        } else powerUp.update()
 
         const dist = Math.hypot(player.x - powerUp.position.x, player.y - powerUp.position.y)
         // gain powerUp
         if (dist < powerUp.image.height/2 + player.radius) {
             powerUps.splice(i, 1)
             player.powerUp = 'MachineGun'
+            player.color = 'yellow'
+
+            // power up runs out
             setTimeout(() => {
                 player.powerUp = null
+                player.color = 'white'
             }, 5000);
         }
     }
+    console.log(powerUps)
 
     // machine gun animation / implementation
     if (player.powerUp === 'MachineGun') {
@@ -214,7 +221,6 @@ const mouse = {
 window.addEventListener('mousemove', (event) => {
     mouse.position.x = event.clientX
     mouse.position.y = event.clientY
-    console.log(mouse.position)
 })
 // restart game
 buttonEl.addEventListener('click', (event) => {
@@ -250,7 +256,6 @@ startButtonEl.addEventListener('click', () => {
 })
 
 window.addEventListener('keydown', (event) => {
-    console.log(event)
     switch (event.key) {
         case 'd':
             player.velocity.x += 1    
