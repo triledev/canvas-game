@@ -169,6 +169,22 @@ class Particle {
     }
 }
 
+class BackgroundParicle {
+    constructor({ position, radius = 3, color = 'blue' }) {
+        this.position = position
+        this.radius = radius
+        this.color = color 
+        this.alpha = 1 
+    }
+
+    draw() {
+        c.beginPath()
+        c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+        c.fillStyle = this.color
+        c.fill()
+    }
+}
+
 class PowerUp {
     constructor({ position = {x: 0, y: 0} , velocity }) {
         this.position = position

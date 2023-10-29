@@ -24,6 +24,7 @@ let intevalId
 let score = 0
 let powerUps = []
 let frames = 0
+let backgroundParticles = []
 
 function init() {
     player = new Player(x, y, 10, 'white')
@@ -34,6 +35,27 @@ function init() {
     score = 0
     scoreEl.innerHTML = 0
     frames = 0
+    backgroundParticles = [new BackgroundParicle({
+        position: {
+            x: 100,
+            y: 100
+        },
+        radius: 5
+    })]
+
+    for (let x = 0; x < canvas.width; x+=20) {
+        for (let y = 0; y < canvas.height; y+=20) {
+            backgroundParticles.push(
+                new BackgroundParicle({
+                    position: {
+                        x: x,
+                        y: y
+                    },
+                    radius: 5
+                })
+            ) // end row
+        }
+    }
 }
 
 function spawnEnemies() {
@@ -102,6 +124,9 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height)
     frames++
 
+    backgroundParticles.forEach(backgroundParticle => {
+        backgroundParticle.draw()
+    })
     player.update()
     for (let i = powerUps.length-1; i >= 0; i--) {
         const powerUp = powerUps[i]
