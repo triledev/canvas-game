@@ -76,6 +76,13 @@ function animate() {
     for (let i = powerUps.length-1; i >= 0; i--) {
         const powerUp = powerUps[i]
         powerUp.update()
+
+        const dist = Math.hypot(player.x - powerUp.position.x, player.y - powerUp.position.y)
+        // gain powerUp
+        if (dist < powerUp.image.height/2 + player.radius) {
+            powerUps.splice(i, 1)
+            player.powerUp = 'MachineGun'
+        }
     }
     
     for (let index = particles.length-1; index >= 0; index--) {
@@ -206,10 +213,10 @@ startButtonEl.addEventListener('click', () => {
 window.addEventListener('keydown', (event) => {
     console.log(event)
     switch (event.key) {
-        case 'f':
+        case 'd':
             player.velocity.x += 1    
             break
-        case 'd':
+        case 'w':
             player.velocity.y -= 1
             break
         case 'a':
