@@ -30,14 +30,7 @@ function init() {
     projectiles = []
     enemies = []
     particles = []
-    powerUps = [
-        new PowerUp({
-            position: {
-                x: 100,
-                y: 100
-            }
-        })
-    ]
+    powerUps = []
     score = 0
     scoreEl.innerHTML = 0
     frames = 0
@@ -69,6 +62,21 @@ function spawnEnemies() {
     }, 1000)
 }
 
+function spawnPowerUps() {
+    spawnPowerUpsID = setInterval(() => {
+        powerUps.push(
+            new PowerUp({
+            position: {
+                x: -30,
+                y: Math.random() * canvas.height
+            },
+            velocity: {
+                x: Math.random() + 1,
+                y: 0
+            }
+        }))
+    }, 1000)
+}
 function animate() {
     animationId = requestAnimationFrame(animate)
     c.fillStyle = 'rgba(0, 0, 0, 0.1)'
@@ -213,6 +221,7 @@ buttonEl.addEventListener('click', (event) => {
     init()
     animate()
     spawnEnemies()
+    spawnPowerUps()
     gsap.to('#modalEl', {
         opacity: 0,
         scale: 0.8,
@@ -228,6 +237,7 @@ startButtonEl.addEventListener('click', () => {
     init()
     animate()
     spawnEnemies()
+    spawnPowerUps()
     gsap.to('#startModalEl', {
         opacity: 0,
         scale: 0.8,

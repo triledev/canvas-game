@@ -194,12 +194,14 @@ class PowerUp {
         c.translate(this.position.x + this.image.width/2, this.position.y + this.image.height/2)
         c.rotate(this.radians)
         c.translate(-this.position.x - this.image.width/2, -this.position.y - this.image.height/2)
-        c.drawImage(this.image, 100, 100)
+        c.drawImage(this.image, this.position.x, this.position.y)
         c.restore()
     }
 
     update() {
         this.draw()
         this.radians += 0.01
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
     }
 }
