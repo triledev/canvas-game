@@ -77,9 +77,9 @@ function spawnPowerUps() {
     }, 10000)
 }
 
-function createScoreLabel({ position }) {
+function createScoreLabel({ position, score }) {
     const scoreLabel = document.createElement('label')
-    scoreLabel.innerHTML = 100
+    scoreLabel.innerHTML = score
     scoreLabel.style.color = 'white'
     scoreLabel.style.position = 'absolute'
     scoreLabel.style.left = position.x + 'px'
@@ -202,10 +202,13 @@ function animate() {
                     gsap.to(enemy, {
                         radius: enemy.radius - 10
                     })
-                    createScoreLabel({position: {
-                        x: projectile.x,
-                        y: projectile.y
-                    }})
+                    createScoreLabel({
+                        position: {
+                            x: projectile.x,
+                            y: projectile.y
+                        },
+                        score: 100
+                    })
                     setTimeout(() => {
                         projectiles.splice(projectileIndex, 1)
                     }, 0)
@@ -213,10 +216,13 @@ function animate() {
                     // remove enemy if they are too small
                     score += 150
                     scoreEl.innerHTML = score
-                    createScoreLabel({position: {
-                        x: projectile.x,
-                        y: projectile.y
-                    }})
+                    createScoreLabel({
+                        position: {
+                            x: projectile.x,
+                            y: projectile.y
+                        },
+                        score: 150
+                    })
                     setTimeout(() => {
                         enemies.splice(index, 1)
                         projectiles.splice(projectileIndex, 1)
