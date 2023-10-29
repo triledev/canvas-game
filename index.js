@@ -82,6 +82,9 @@ function animate() {
         if (dist < powerUp.image.height/2 + player.radius) {
             powerUps.splice(i, 1)
             player.powerUp = 'MachineGun'
+            setTimeout(() => {
+                player.powerUp = null
+            }, 5000);
         }
     }
 
