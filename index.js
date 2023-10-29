@@ -88,7 +88,10 @@ function createScoreLabel({ position }) {
     gsap.to(scoreLabel, {
         opacity: 0,
         y: -30,
-        duration: 0.75
+        duration: 0.75,
+        onComplete: () => {
+            scoreLabel.parentNode.removeChild(scoreLabel)
+        }
     })
 }
 
