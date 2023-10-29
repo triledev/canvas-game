@@ -174,7 +174,7 @@ class BackgroundParicle {
         this.position = position
         this.radius = radius
         this.color = color 
-        this.alpha = 1 
+        this.alpha = 0.1 
     }
 
     draw() {

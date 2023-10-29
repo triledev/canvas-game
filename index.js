@@ -129,7 +129,7 @@ function animate() {
         if (dist < 100) {
             backgroundParticle.alpha = 0
         } else if (dist > 100) {
-            backgroundParticle.alpha = 1
+            backgroundParticle.alpha = 0.1
         }
 
     })
