@@ -8,6 +8,8 @@ const modalScoreEl = document.querySelector('#modalScoreEl')
 const buttonEl = document.querySelector('#buttonEl')
 const startButtonEl = document.querySelector('#startButtonEl')
 const startModalEl = document.querySelector('#startModalEl')
+const volumeUpEl = document.querySelector('#volumeUpEl')
+const volumeOffEl = document.querySelector('#volumeOffEl')
 
 canvas.width = innerWidth
 canvas.height = innerHeight
@@ -288,9 +290,11 @@ function animate() {
     }
 }
 
+let audioIntialized = false
 window.addEventListener('click', (event) => {
-    if (!audio.background.playing()) {
+    if (!audio.background.playing() && !audioIntialized) {
         audio.background.play()
+        audioIntialized = true
     }
     if (game.active === true) {
         const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
@@ -346,6 +350,14 @@ startButtonEl.addEventListener('click', () => {
             startModalEl.style.display = 'none'
         }
     })
+})
+
+volumeUpEl.addEventListener('click', () => {
+    audio.background.pause()
+})
+
+volumeOffEl.addEventListener('click', () => {
+    if (audioIntialized) audio.background.play()
 })
 
 window.addEventListener('keydown', (event) => {
