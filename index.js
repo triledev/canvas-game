@@ -232,7 +232,7 @@ function animate() {
                 }
                 // this is where we shrink our enemy
                 if (enemy.radius-10 > 5) {
-                    damageTakeAudio.play()
+                    audio.damageTaken.play()
                     score += 100
                     scoreEl.innerHTML = score
                     gsap.to(enemy, {
@@ -287,7 +287,7 @@ window.addEventListener('click', (event) => {
         y: Math.sin(angle) * 6
     }
     projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity))
-    shootAudio.play()
+    audio.shoot.play()
 })
 
 const mouse = {
