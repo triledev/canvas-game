@@ -289,6 +289,9 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => {
+    if (!audio.background.playing()) {
+        audio.background.play()
+    }
     if (game.active === true) {
         const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
         const velocity = {
