@@ -205,6 +205,7 @@ function animate() {
         if (dist - enemy.radius - player.radius < 0) {
             cancelAnimationFrame(animationId)
             clearInterval(intevalId)
+            audio.death.play()
             modalEl.style.display = 'block'
             gsap.fromTo('#modalEl', {scale: 0.8, opacity: 0}, {scale: 1, opacity: 1, ease: 'expo'})
             modalScoreEl.innerHTML = score
