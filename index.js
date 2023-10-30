@@ -172,6 +172,10 @@ function animate() {
         if (frames % 2 === 0) {
             projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity))
         }
+
+        if (frames % 4 === 0) {
+            audio.shoot.play()
+        }
     }
     
     for (let index = particles.length-1; index >= 0; index--) {
