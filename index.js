@@ -269,7 +269,6 @@ function animate() {
                                 color: enemy.color,
                                 alpha: 0.1
                             })
-                            // backgroundParticle.color = enemy.color
                         })
                         enemies.splice(index, 1)
                         projectiles.splice(projectileIndex, 1)
