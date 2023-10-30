@@ -29,6 +29,10 @@ const shootAudio = new Howl({
     src: './audio/Basic_shoot_noise.wav',
     volume: 0.1
 })
+const damageTakeAudio = new Howl({
+    src: './audio/Damage_taken.wav',
+    volume: 0.1
+})
 
 function init() {
     player = new Player(x, y, 10, 'white')
@@ -236,6 +240,7 @@ function animate() {
                 }
                 // this is where we shrink our enemy
                 if (enemy.radius-10 > 5) {
+                    damageTakeAudio.play()
                     score += 100
                     scoreEl.innerHTML = score
                     gsap.to(enemy, {
