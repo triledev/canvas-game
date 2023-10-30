@@ -25,14 +25,6 @@ let score = 0
 let powerUps = []
 let frames = 0
 let backgroundParticles = []
-const shootAudio = new Howl({
-    src: './audio/Basic_shoot_noise.wav',
-    volume: 0.1
-})
-const damageTakeAudio = new Howl({
-    src: './audio/Damage_taken.wav',
-    volume: 0.1
-})
 
 function init() {
     player = new Player(x, y, 10, 'white')
