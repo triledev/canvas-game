@@ -212,6 +212,7 @@ function animate() {
         if (dist - enemy.radius - player.radius < 0) {
             cancelAnimationFrame(animationId)
             clearInterval(intevalId)
+            clearInterval(spawnPowerUpsID)
             audio.death.play()
             game.active = false
 
