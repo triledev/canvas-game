@@ -25,6 +25,7 @@ let score = 0
 let powerUps = []
 let frames = 0
 let backgroundParticles = []
+const shootAudio = new Audio('./audio/Basic_shoot_noise.wav')
 
 function init() {
     player = new Player(x, y, 10, 'white')
@@ -280,16 +281,13 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => {
-    const angle = Math.atan2(
-        event.clientY - player.y, 
-        event.clientX - player.x)
+    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
     const velocity = {
         x: Math.cos(angle) * 6,
         y: Math.sin(angle) * 6
     }
-    projectiles.push(
-        new Projectile(player.x, player.y, 5, 'white', velocity)
-    )
+    projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity))
+    shootAudio.play()
 })
 
 const mouse = {
