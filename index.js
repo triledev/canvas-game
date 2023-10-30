@@ -152,6 +152,7 @@ function animate() {
             powerUps.splice(i, 1)
             player.powerUp = 'MachineGun'
             player.color = 'yellow'
+            audio.powerUpNoise.play()
 
             // power up runs out
             setTimeout(() => {
