@@ -25,7 +25,9 @@ let score = 0
 let powerUps = []
 let frames = 0
 let backgroundParticles = []
-
+let game = {
+    active: false
+}
 function init() {
     player = new Player(x, y, 10, 'white')
     projectiles = []
@@ -35,13 +37,10 @@ function init() {
     score = 0
     scoreEl.innerHTML = 0
     frames = 0
-    backgroundParticles = [new BackgroundParicle({
-        position: {
-            x: 100,
-            y: 100
-        },
-        radius: 5
-    })]
+    backgroundParticles = []
+    game = {
+        active: true
+    }
 
     const spacing = 30
     for (let x = 0; x < canvas.width + spacing; x+=spacing) {
@@ -173,7 +172,7 @@ function animate() {
             projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity))
         }
 
-        if (frames % 4 === 0) {
+        if (frames % 5 === 0) {
             audio.shoot.play()
         }
     }
@@ -211,6 +210,8 @@ function animate() {
             cancelAnimationFrame(animationId)
             clearInterval(intevalId)
             audio.death.play()
+            game.active = false
+
             modalEl.style.display = 'block'
             gsap.fromTo('#modalEl', {scale: 0.8, opacity: 0}, {scale: 1, opacity: 1, ease: 'expo'})
             modalScoreEl.innerHTML = score
@@ -288,13 +289,15 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => {
-    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
-    const velocity = {
-        x: Math.cos(angle) * 6,
-        y: Math.sin(angle) * 6
+    if (game.active === true) {
+        const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
+        const velocity = {
+            x: Math.cos(angle) * 6,
+            y: Math.sin(angle) * 6
+        }
+        projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity))
+        audio.shoot.play()
     }
-    projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity))
-    audio.shoot.play()
 })
 
 const mouse = {
@@ -309,6 +312,7 @@ window.addEventListener('mousemove', (event) => {
 })
 // restart game
 buttonEl.addEventListener('click', (event) => {
+    audio.select.play()
     init()
     animate()
     spawnEnemies()
@@ -325,6 +329,7 @@ buttonEl.addEventListener('click', (event) => {
 })
 
 startButtonEl.addEventListener('click', () => {
+    audio.select.play()
     init()
     animate()
     spawnEnemies()
