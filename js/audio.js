@@ -10,5 +10,9 @@ const audio = {
     explode: new Howl({
         src: './audio/Explode.wav',
         volume: 0.1
+    }),
+    death: new Howl({
+        src: './audio/Death.wav',
+        volume: 0.1
     })
 }
