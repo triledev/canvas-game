@@ -25,7 +25,9 @@ let score = 0
 let powerUps = []
 let frames = 0
 let backgroundParticles = []
-const shootAudio = new Audio('./audio/Basic_shoot_noise.wav')
+const shootAudio = new Howl({
+    src: './audio/Basic_shoot_noise.wav'
+})
 
 function init() {
     player = new Player(x, y, 10, 'white')
