@@ -354,9 +354,23 @@ startButtonEl.addEventListener('click', () => {
 
 volumeUpEl.addEventListener('click', () => {
     audio.background.pause()
+    
+    volumeOffEl.style.display = 'block'
+    volumeUpEl.style.display = 'none'
+
+    for (let key in audio) {
+        audio[key].mute(true)
+    }
 })
 
 volumeOffEl.addEventListener('click', () => {
+    volumeOffEl.style.display = 'none'
+    volumeUpEl.style.display = 'block'
+
+    for (let key in audio) {
+        audio[key].mute(false)
+    }
+
     if (audioIntialized) audio.background.play()
 })
 
