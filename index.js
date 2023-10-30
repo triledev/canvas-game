@@ -250,6 +250,7 @@ function animate() {
                     }, 0)
                 } else {
                     // remove enemy if they are too small
+                    audio.explode.play()
                     score += 150
                     scoreEl.innerHTML = score
                     createScoreLabel({

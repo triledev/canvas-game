@@ -6,5 +6,9 @@ const audio = {
     damageTaken: new Howl({
         src: './audio/Damage_taken.wav',
         volume: 0.1
+    }),
+    explode: new Howl({
+        src: './audio/Explode.wav',
+        volume: 0.1
     })
 }
