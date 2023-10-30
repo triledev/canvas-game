@@ -331,6 +331,12 @@ window.addEventListener('mousemove', (event) => {
     mouse.position.x = event.clientX
     mouse.position.y = event.clientY
 })
+
+window.addEventListener('touchmove', (event) => {
+    mouse.position.x = event.touches[0].clientX
+    mouse.position.y = event.touches[0].clientY
+})
+
 // restart game
 buttonEl.addEventListener('click', (event) => {
     audio.select.play()
