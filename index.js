@@ -26,7 +26,8 @@ let powerUps = []
 let frames = 0
 let backgroundParticles = []
 const shootAudio = new Howl({
-    src: './audio/Basic_shoot_noise.wav'
+    src: './audio/Basic_shoot_noise.wav',
+    volume: 0.1
 })
 
 function init() {
