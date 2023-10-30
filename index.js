@@ -14,10 +14,7 @@ const volumeOffEl = document.querySelector('#volumeOffEl')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-const x = canvas.width / 2
-const y = canvas.height / 2
-
-let player = new Player(x, y, 10, 'white')
+let player
 let projectiles = []
 let enemies = []
 let particles = []
@@ -30,7 +27,10 @@ let backgroundParticles = []
 let game = {
     active: false
 }
+
 function init() {
+    const x = canvas.width / 2
+    const y = canvas.height / 2
     player = new Player(x, y, 10, 'white')
     projectiles = []
     enemies = []
@@ -377,6 +377,8 @@ volumeOffEl.addEventListener('click', () => {
 window.addEventListener('resize', () => {
     canvas.width = innerWidth
     canvas.height = innerHeight
+
+    init()
 })
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
