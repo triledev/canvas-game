@@ -106,6 +106,7 @@ function createScoreLabel({ position, score }) {
     scoreLabel.style.left = position.x + 'px'
     scoreLabel.style.top = position.y + 'px'
     scoreLabel.style.userSelect = 'none'
+    scoreLabel.style.pointerEvents = 'none'
     document.body.appendChild(scoreLabel)
     gsap.to(scoreLabel, {
         opacity: 0,
@@ -291,13 +292,10 @@ function animate() {
 }
 
 let audioIntialized = false
-window.addEventListener('click', (event) => {
-    if (!audio.background.playing() && !audioIntialized) {
-        audio.background.play()
-        audioIntialized = true
-    }
+
+function shoot({x, y}) {
     if (game.active === true) {
-        const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
+        const angle = Math.atan2(y - player.y, x - player.x)
         const velocity = {
             x: Math.cos(angle) * 6,
             y: Math.sin(angle) * 6
@@ -305,6 +303,22 @@ window.addEventListener('click', (event) => {
         projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity))
         audio.shoot.play()
     }
+}
+
+window.addEventListener('click', (event) => {
+    if (!audio.background.playing() && !audioIntialized) {
+        audio.background.play()
+        audioIntialized = true
+    }
+
+    shoot({x: event.clientX, y: event.clientY})
+})
+
+window.addEventListener('touchstart', (event) => {
+    const x = event.touches[0].clientX
+    const y = event.touches[0].clientY
+
+    shoot({x, y})
 })
 
 const mouse = {
@@ -380,6 +394,7 @@ window.addEventListener('resize', () => {
 
     init()
 })
+
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':

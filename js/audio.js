@@ -24,7 +24,7 @@ const audio = {
         volume: 0.1
     }),
     background: new Howl({
-        src: './audio/Ahegao.wav',
+        src: './audio/Hyper.wav',
         volume: 0.1,
         loop: true
     })
