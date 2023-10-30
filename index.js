@@ -401,6 +401,18 @@ window.addEventListener('resize', () => {
     init()
 })
 
+document.addEventListener('visibilityChange', () => {
+    if (document.hidden) {
+        // inactive
+        // clearInteval
+        clearInterval(intevalId)
+        clearInterval(spawnPowerUpsID)
+    } else {
+        // spawnEnemies spawnPowerUps
+        spawnEnemies()
+        spawnPowerUps()
+    }
+})
 window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'd':
